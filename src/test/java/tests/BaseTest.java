@@ -5,6 +5,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import steps.*;
+import utils.CapabilitiesGenerator;
 import utils.PropertyManager;
 
 import java.util.concurrent.TimeUnit;
@@ -21,8 +22,7 @@ public class BaseTest {
 
     @BeforeMethod(description = "Opening Chrome Driver")
     public void setDriver() {
-        System.setProperty("webdriver.chrome.driver", "src/test/resources/webdrivers/chromedriver.exe");
-        driver = new ChromeDriver();
+        driver = new ChromeDriver(CapabilitiesGenerator.getChromeOptions());
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         driver.manage().window().maximize();
         login = new LoginSteps(driver);
